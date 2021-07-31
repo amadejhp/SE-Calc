@@ -51,7 +51,7 @@ readline.question('Drag space engineers folder here (right click game -> propert
     }
     readline.question('Drag blueprint folder you would like to calculate (run %appdata& -> SpaceEngineers -> blueprints -> local -> drag and drop selected blueprint folder -> select app window -> hit enter', (path) => {
         var count = 0;
-        data[path] = fs.readFileSync(patmh + '\\bp.sbc', { encoding: 'utf8' });
+        data[path] = fs.readFileSync(path + '\\bp.sbc', { encoding: 'utf8' });
         parseString(data[path], function(err, result) {
             json[path] = result;
         });
