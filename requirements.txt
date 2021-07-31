@@ -1,0 +1,26 @@
+
+"LargeBlockArmorBlock" X 171 
+"LargeBlockConveyor" X 1 
+"LargeAdvancedStator" X 1 
+"LargeBlockConveyorPipeCorner" X 3 
+"LargeBlockBatteryBlock" X 1 
+"LargeSciFiButtonPanel" X 1 
+"LargeBlockSmallContainer" X 1 
+"LargeBlockConveyorPipeSeamless" X 14 
+"LargeBlockConveyorPipeIntersection" X 40 
+"LargePistonBase" X 80 
+"LargeAdvancedRotor" X 1 
+"LargeProjector" X 1 
+"LargePistonTop" X 80 
+"LargeShipWelder" X 40 
+------------------------------------------------ 
+SteelPlate X 7221 
+InteriorPlate X 1028 
+Construction X 3274 
+SmallTube X 884 
+Motor X 757 
+LargeTube X 1016 
+Computer X 291 
+PowerCell X 80 
+Display X 6 
+MetalGrid X 4 
