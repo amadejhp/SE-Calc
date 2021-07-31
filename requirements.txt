@@ -1,0 +1,29 @@
+
+"LargeBlockLandingGear" X 3 
+"LargeBlockArmorBlock" X 141 
+"LargeBlockSmallAtmosphericThrust" X 16 
+"ConveyorTubeCurved" X 7 
+"LargePistonBase" X 5 
+"LargeBlockLargeContainer" X 1 
+"LargeBlockGyro" X 4 
+"ConveyorTube" X 2 
+"LargeBlockBatteryBlock" X 4 
+"LargeBlockCockpitSeat" X 1 
+"LargeBlockConveyor" X 1 
+"LargeBlockLargeAtmosphericThrust" X 4 
+"ButtonPanelLarge" X 2 
+"LargePistonTop" X 5 
+"LargeBlockConveyorSorter" X 1 
+"LargeBlockDrill" X 1 
+------------------------------------------------ 
+SteelPlate X 8630 
+Construction X 1940 
+Motor X 6302 
+LargeTube X 416 
+MetalGrid X 544 
+InteriorPlate X 576 
+SmallTube X 238 
+Computer X 303 
+Display X 9 
+PowerCell X 320 
+BulletproofGlass X 60 
