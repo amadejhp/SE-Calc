@@ -4,7 +4,6 @@ const readline = require('readline').createInterface({
     output: process.stdout
 });
 const fs = require("fs");
-
 var parseString = require('xml2js').parseString;
 var SELoc;
 var BPloc;
@@ -16,7 +15,7 @@ var objects = {};
 var bpParts = {};
 var req = {};
 var text = "\n";
-readline.question('Drag space engineers folder here (right click game -> properties -> local files -> browse local files -> common -> drag and drop space engineers folder -> hit enter twice)', (path) => {
+readline.question('Drag space engineers folder here (right click game -> properties -> local files -> browse local files -> common -> drag and drop space engineers folder -> select app window -> hit enter)', (path) => {
     var blockPath = path + "\\Content\\Data\\CubeBlocks";
     var fileList = getFiles(blockPath);
     var count = 0;
@@ -50,9 +49,9 @@ readline.question('Drag space engineers folder here (right click game -> propert
         }
         count++;
     }
-    readline.question('Drag blueprint folder you would like to calculate (run %appdata& -> SpaceEngineers -> blueprints -> local -> drag and drop selected blueprint folder -> hit enter', (path) => {
+    readline.question('Drag blueprint folder you would like to calculate (run %appdata& -> SpaceEngineers -> blueprints -> local -> drag and drop selected blueprint folder -> select app window -> hit enter', (path) => {
         var count = 0;
-        data[path] = fs.readFileSync(path + '\\bp.sbc', { encoding: 'utf8' });
+        data[path] = fs.readFileSync(patmh + '\\bp.sbc', { encoding: 'utf8' });
         parseString(data[path], function(err, result) {
             json[path] = result;
         });
