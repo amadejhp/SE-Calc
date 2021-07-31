@@ -24,8 +24,8 @@
         "JS",
         "node.js"
     ],
-    "author": "Oran RH",
-    "license": "MIT",
+    "author": "Oran RH, admadejhp",
+    "license": "GPL",
     "bugs": {
         "url": "https://github.com/amadejhp/SE-Calc/issues"
     },
@@ -35,7 +35,8 @@
             "node_modules/**/*"
         ],
         "targets": [
-            "host"
+            "host",
+            "node14-linux-x64"
         ]
     }
 }
