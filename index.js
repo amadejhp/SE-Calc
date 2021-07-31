@@ -16,7 +16,7 @@ var objects = {};
 var bpParts = {};
 var req = {};
 var text = "\n";
-readline.question('Drag space engineers folder here (right click game -> properties -> local files -> browse local files -> common -> drag and drop space engineers folder -> select app window -> hit enter )', (path) => {
+readline.question('Drag space engineers folder here (right click game -> properties -> local files -> browse local files -> common -> drag and drop space engineers folder -> select app window -> hit enter) ', (path) => {
     var blockPath = path + "\\Content\\Data\\CubeBlocks";
     try {
         var fileList = getFiles(blockPath);
@@ -57,9 +57,12 @@ readline.question('Drag space engineers folder here (right click game -> propert
             count++;
         }
     } catch {}
-    readline.question('Drag blueprint folder you would like to calculate (run %appdata& -> SpaceEngineers -> blueprints -> local -> drag and drop selected blueprint folder -> select app window -> hit enter ', (path) => {
+    readline.question('Drag blueprint folder you would like to calculate (run %appdata& -> SpaceEngineers -> blueprints -> local -> drag and drop selected blueprint folder -> select app window -> hit enter) ', (path) => {
         if (path.startsWith("&")) {
             path = path.substring(3, path.length - 1);
+        }
+        if (path.startsWith('"')) {
+            path = path.substring(1, path.length - 1);
         }
         var count = 0;
         try {
