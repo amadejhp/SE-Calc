@@ -14,7 +14,8 @@ var json = {};
 var objects = {};
 var bpParts = {};
 var req = {};
-readline.question('Enter Space Engineers path here (right click game -> properties -> local files -> browse local files ', (path) => {
+var text = "\n";
+readline.question('Drag space engineers folder here (right click game -> properties -> local files -> browse local files -> steamapps -> drag and drop space engineers folder -> hit enter twice)', (path) => {
     var blockPath = path + "\\Content\\Data\\CubeBlocks";
     var fileList = getFiles(blockPath);
     var count = 0;
@@ -48,18 +49,18 @@ readline.question('Enter Space Engineers path here (right click game -> properti
         }
         count++;
     }
-    readline.question('Enter the path to the blueprint you would like to print (run %appdata& -> SpaceEngineers -> blueprints -> local -> selected blueprint ', (path) => {
+    readline.question('Drag blueprint folder you would like to calculate (run %appdata& -> SpaceEngineers -> blueprints -> local -> drag and drop selected blueprint folder -> hit enter', (path) => {
         var count = 0;
-        data[path] = fs.readFileSync(path + "\\bp.sbc", { encoding: 'utf8' });
+        data[path] = fs.readFileSync(path + '\\bp.sbc', { encoding: 'utf8' });
         parseString(data[path], function(err, result) {
             json[path] = result;
         });
-        var length = json[path].Definitions.ShipBlueprints.length;
+        var length = json[path].Definitions.ShipBlueprints[0].ShipBlueprint[0].CubeGrids[0].CubeGrid.length;
         while (count < length) {
-            var length2 = json[path].Definitions.ShipBlueprints[0].ShipBlueprint[count].CubeGrids[0].CubeGrid[0].CubeBlocks[0].MyObjectBuilder_CubeBlock.length;
+            var length2 = json[path].Definitions.ShipBlueprints[0].ShipBlueprint[0].CubeGrids[0].CubeGrid[count].CubeBlocks[0].MyObjectBuilder_CubeBlock.length;
             var count1 = 0;
             while (count1 < length2) {
-                var name = json[path].Definitions.ShipBlueprints[0].ShipBlueprint[count].CubeGrids[0].CubeGrid[0].CubeBlocks[0].MyObjectBuilder_CubeBlock[count1].SubtypeName[0];
+                var name = json[path].Definitions.ShipBlueprints[0].ShipBlueprint[0].CubeGrids[0].CubeGrid[count].CubeBlocks[0].MyObjectBuilder_CubeBlock[count1].SubtypeName[0];
                 if (bpParts.hasOwnProperty(JSON.stringify(name))) {
                     bpParts[JSON.stringify(name)] = bpParts[JSON.stringify(name)] + 1;
                 } else {
@@ -73,7 +74,6 @@ readline.question('Enter Space Engineers path here (right click game -> properti
         var length = (Object.keys(bpParts).length);
         var count = 0;
         var itemList = Object.keys(bpParts);
-        console.log(bpParts);
         while (count < length) {
             var currentItem = itemList[count];
             var currentItemCount = bpParts[currentItem];
@@ -81,7 +81,6 @@ readline.question('Enter Space Engineers path here (right click game -> properti
             while (count1 < currentItemCount) {
                 var numberOfMats = bpParts[currentItem];
                 var matCurrent = objects[currentItem.substring(1, currentItem.length - 1)]
-                console.log(matCurrent);
                 var matIndex = Object.keys(matCurrent);
                 var counting = 0;
                 while (counting < matIndex.length) {
@@ -98,7 +97,28 @@ readline.question('Enter Space Engineers path here (right click game -> properti
             }
             count++;
         }
-        console.log(req);
+        var partCount = Object.keys(bpParts);
+        var resourceCount = Object.keys(req);
+        var count = 0;
+        while (count < partCount.length) {
+            text = text + `${partCount[count]} X ${bpParts[partCount[count]]} \n`
+            count++;
+        }
+        text = text + "------------------------------------------------ \n";
+        var count = 0;
+        while (count < resourceCount.length) {
+            text = text + `${resourceCount[count]} X ${req[resourceCount[count]]} \n`
+            count++;
+        }
+        fs.writeFileSync("requirements.txt", text);
+        var outPutted = 0;
+        console.log("Complete! See data here, file saved as requirements.txt\n");
+        console.log(text);
+        async function wait() {
+            console.log("\nClose window, or wait and it will automatically close");
+            await new Promise(r => setTimeout(r, 10000));
+        }
+        wait();
     });
 });
 

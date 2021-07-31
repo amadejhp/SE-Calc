@@ -1,0 +1,41 @@
+{
+    "name": "secalc",
+    "version": "0.1.0",
+    "description": "SECalc",
+    "main": "index.js",
+    "bin": "index.js",
+    "dependencies": {
+        "fs": "^0.0.1-security",
+        "prompt": "^1.1.0",
+        "readline": "^1.3.0",
+        "xml2js": "^0.4.23"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/amadejhp/SE-Calc.git"
+    },
+    "keywords": [
+        "Space",
+        "Engineers",
+        "JS",
+        "node.js"
+    ],
+    "author": "Oran RH",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/amadejhp/SE-Calc/issues"
+    },
+    "homepage": "https://github.com/amadejhp/SE-Calc#readme",
+    "pkg": {
+        "assets": [
+            "node_modules/**/*"
+        ],
+        "targets": [
+            "host"
+        ]
+    }
+}
