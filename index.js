@@ -1,9 +1,10 @@
-const fs = require("fs");
 const { kill, resourceUsage } = require("process");
 const readline = require('readline').createInterface({
     input: process.stdin,
     output: process.stdout
 });
+const fs = require("fs");
+
 var parseString = require('xml2js').parseString;
 var SELoc;
 var BPloc;
