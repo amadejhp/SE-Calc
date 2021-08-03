@@ -16,16 +16,39 @@ var objects = {};
 var bpParts = {};
 var req = {};
 var text = "\n";
-readline.question('Drag space engineers folder here (right click game -> properties -> local files -> browse local files -> common -> drag and drop space engineers folder -> select app window -> hit enter) ', (path) => {
-    var blockPath = path + "\\Content\\Data\\CubeBlocks";
+var blockPath;
+async function doShit() {
+    console.log(fs.existsSync("SEPath.txt"));
+    if (fs.existsSync("SEPath.txt")) {
+        console.log("Path found!");
+        var blockPath = (fs.readFileSync("SEPath.txt"));
+        doLogic(blockPath);
+    } else if (!fs.existsSync("SEPath.txt")) {
+        console.log("Path not found! Please enter below \n");
+        readline.question('Drag space engineers folder here (right click game -> properties -> local files -> browse local files -> common -> drag and drop space engineers folder -> select app window -> hit enter) ', (result) => {
+            var blockPath = result + "\\Content\\Data\\CubeBlocks";
+            doLogic(blockPath);
+            fs.writeFileSync("SEPath.txt", blockPath);
+        });
+    }
+}
+doShit();
+
+function doLogic(blockPath) {
     try {
         var fileList = getFiles(blockPath);
+        runThings(blockPath);
+        console.log("Checking file!");
     } catch {
         console.error("Invalid Space Engineers file. Please check the location you got it from, and ensure that it is the file named SpaceEngineers within the common folder.");
         readline.close();
     }
+}
+
+function runThings(blockPath) {
     var count = 0;
     try {
+        console.log("Getting files from space engineers!");
         while (count < fileList.length) {
             data[fileList[count]] = fs.readFileSync(blockPath + "\\" + fileList[count], { encoding: 'utf8' });
             parseString(data[fileList[count]], function(err, result) {
@@ -56,7 +79,7 @@ readline.question('Drag space engineers folder here (right click game -> propert
             }
             count++;
         }
-    } catch {}
+    } catch (e) { console.error(e) }
     readline.question('Drag blueprint folder you would like to calculate (run %appdata& -> SpaceEngineers -> blueprints -> local -> drag and drop selected blueprint folder -> select app window -> hit enter) ', (path) => {
         if (path.startsWith("&")) {
             path = path.substring(3, path.length - 1);
@@ -71,6 +94,7 @@ readline.question('Drag space engineers folder here (right click game -> propert
             console.error("Invalid blueprint file. If blueprint includes quotes, please remove them as quotes currently break everything. If it should be a valid blueprint and isn't, god help you.");
         }
         try {
+            console.log("Getting blueprint data!");
             parseString(data[path], function(err, result) {
                 json[path] = result;
             });
@@ -93,6 +117,7 @@ readline.question('Drag space engineers folder here (right click game -> propert
             var length = (Object.keys(bpParts).length);
             var count = 0;
             var itemList = Object.keys(bpParts);
+            console.log("Putting together each part in blueprint!");
             while (count < length) {
                 var currentItem = itemList[count];
                 var currentItemCount = bpParts[currentItem];
@@ -139,8 +164,9 @@ readline.question('Drag space engineers folder here (right click game -> propert
             }
             wait();
         } catch {}
+        readline.close();
     });
-});
+}
 
 function getFiles(path) {
     try {
@@ -154,6 +180,7 @@ function getFiles(path) {
         console.error("Invalid Space Engineers file. Please check the location you got it from, and ensure that it is the file named SpaceEngineers within the common folder.");
     }
 }
+
 
 function FatalError() {
     Error.apply(this, arguments);
